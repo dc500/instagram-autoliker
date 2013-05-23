@@ -13,8 +13,7 @@ console.log 'Listening on port ' + app.get('port')
 # Routes
 # TODO: put these in a separate file
 
-app.get('/', (req, res) ->
-	res.send('BEEZI SUX') )
+app.get('/', (req, res) -> res.send('BEEZI SUX') )
 
 app.get('/authorize', (req, res) -> 
 	auth_uri = "https://api.instagram.com/oauth/authorize/?
@@ -29,12 +28,15 @@ app.get('/authorize', (req, res) ->
 app.get('/confirm', (req, res) ->
 	auth_code = req.params.code
 	res.send('Redirect landing page')
-	res.send('auth_code: ' + auth_code) )
+	res.send('auth_code: ' + auth_code)
+)
 
 app.get('/newimage', (req, res) ->
 	res.send('New image GET')
+)
 
 app.post('/newimage', (req, res) ->
-	res.send('New image POST') )
+	res.send('New image POST') 
+)
 
 app.listen(app.get('port'))
