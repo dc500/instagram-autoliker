@@ -3,7 +3,7 @@ app = express()
 
 CLIENT_ID = '83f2bc2cf35842dbb45785e5b3efe457'
 CLIENT_SECRET = '8602ba3eda234f5cb32a305938943b59'
-REDIRECT_URI = 'http://pure-wildwood-8107.herokuapp.com/confirm/'
+REDIRECT_URI = 'http://pure-wildwood-8107.herokuapp.com/confirm'
 
 app.configure ->
   app.set "port", process.env.PORT or 4000
@@ -25,7 +25,7 @@ app.get('/authorize', (req, res) ->
 	res.redirect(auth_uri)
 )
 
-app.get('/confirm/:code', (req, res) ->
+app.get('/confirm?code=:code', (req, res) ->
 	console.log 'req: ' + req
 	params = req.params
 	console.log 'params: ' + params
