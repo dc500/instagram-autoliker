@@ -25,11 +25,8 @@ app.get('/authorize', (req, res) ->
 	res.redirect(auth_uri)
 )
 
-app.get('/confirm?code=:code', (req, res) ->
-	console.log 'req: ' + req
-	params = req.params
-	console.log 'params: ' + params
-	auth_code = req.params.code
+app.get('/confirm', (req, res) ->
+	auth_code = req.query.code
 	console.log 'code: ' + auth_code
 	res.send('Redirect landing page')
 	res.send('auth_code: ' + auth_code)
