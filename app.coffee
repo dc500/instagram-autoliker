@@ -27,12 +27,12 @@ app.get('/authorize', (req, res) ->
 )
 
 app.get('/confirm', (req, res) ->
-	console.log(req.data)
-	res.send('Redirect landing page') )
+	auth_code = req.params.code
+	res.send('Redirect landing page')
+	res.send('auth_code: ' + auth_code) )
 
 app.get('/newimage', (req, res) ->
 	res.send('New image GET')
-	res.send(req.headers) ) 
 
 app.post('/newimage', (req, res) ->
 	res.send('New image POST') )
