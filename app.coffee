@@ -12,4 +12,4 @@ app.get('/', (req, res) ->
 app.post('/newimage', (req, res) ->
 	res.send('Image updated\nLike registered') )
 
-app.listen(4000)
+app.listen(app.get('port'))
