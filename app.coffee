@@ -14,6 +14,7 @@ app.get('/confirm', (req, res) ->
 
 app.get('/newimage', (req, res) ->
 	res.send('New image GET') )
+	res.send(req.headers)
 
 app.post('/newimage', (req, res) ->
 	res.send('New image POST') )
