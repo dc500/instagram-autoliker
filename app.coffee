@@ -25,7 +25,7 @@ app.get('/authorize', (req, res) ->
 	res.redirect(auth_uri)
 )
 
-app.get('/confirm', (req, res) ->
+app.get('/confirm:code', (req, res) ->
 	console.log 'req: ' + req
 	params = req.params
 	console.log 'params: ' + params
