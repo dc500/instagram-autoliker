@@ -27,6 +27,7 @@ app.get('/authorize', (req, res) ->
 )
 
 app.get('/confirm', (req, res) ->
+	console.log(req.data)
 	res.send('Redirect landing page') )
 
 app.get('/newimage', (req, res) ->
