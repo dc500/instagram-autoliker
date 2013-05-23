@@ -10,6 +10,6 @@ app.get('/', (req, res) ->
 	res.send('BEEZI SUX') )
 
 app.post('/newimage', (req, res) ->
-	res.send('Image updated\nLike registered') )
+	res.send('New image route') )
 
 app.listen(app.get('port'))
