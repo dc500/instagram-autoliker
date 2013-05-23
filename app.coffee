@@ -26,9 +26,10 @@ app.get('/authorize', (req, res) ->
 )
 
 app.get('/confirm', (req, res) ->
+	if req.query.error
+		res.send('error authenticating: ' + req.query.error_description)
 	auth_code = req.query.code
 	console.log 'code: ' + auth_code
-	res.send('Redirect landing page')
 	res.send('auth_code: ' + auth_code)
 )
 
