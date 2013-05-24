@@ -58,7 +58,8 @@ app.get('/confirm', (req, res) ->
 		console.log(json.parse(body))
 		console.log 'sending'
 		"""
-		res.send(json.parse(body))
+		#res.send(json.parse(body))
+		res.send(body)
 		#res.send("access_token: " + access_token)
 	)
 	console.log 'fak'
