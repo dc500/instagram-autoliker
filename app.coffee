@@ -51,7 +51,7 @@ app.get('/confirm', (req, res) ->
 		access_token = body["access_token"]
 		console.log body
 		console.log access_token
-		res.send(access_token)
+		res.send("body: " + body + "\n" + access_token: " + access_token)
 	)
 )
 
