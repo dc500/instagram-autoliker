@@ -4,9 +4,10 @@ querystring = require 'querystring'
 json = require 'JSON'
 app = express()
 
+BASE_URL = 'http://pure-wildwood-8107.herokuapp.com'
 CLIENT_ID = '83f2bc2cf35842dbb45785e5b3efe457'
 CLIENT_SECRET = '8602ba3eda234f5cb32a305938943b59'
-REDIRECT_URI = 'http://pure-wildwood-8107.herokuapp.com/confirm'
+REDIRECT_URI = BASE_URL + '/confirm'
 access_token = null
 
 app.configure ->
@@ -51,8 +52,8 @@ app.get('/confirm', (req, res) ->
 		if err
 			res.send("error retrieving access token: " + err)
 		response = json.parse(body)
-		access_token = response.access_token
-		res.send('Authentication successful!\naccess_token: ' + access_token)
+		create_subscription(response.access_token)
+		res.send('Authentication successful!')
 	)
 )
 
@@ -65,3 +66,25 @@ app.post('/newimage', (req, res) ->
 )
 
 app.listen(app.get('port'))
+
+# helper functions
+create_subscription (access_token) ->
+	postdata = 
+			'client_id': CLIENT_ID 
+			'client_secret': CLIENT_SECRET
+			'object': 'user'
+			'aspect': 'media'
+			'verify_token': access_token
+			'callback_url': BASE_URL + '/newimage'
+
+		# POST to create a subscription
+		request.post({
+			url: 'https://api.instagram.com/v1/subscriptions/',
+			body: querystring.stringify(postdata)
+		}, (err, response, body) ->
+			if err
+				res.send("error creating subscription: " + err)
+			response = json.parse(body)
+			create_subscription(response.access_token)
+			res.send('Authentication successful!')
+		)
