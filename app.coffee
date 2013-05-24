@@ -44,6 +44,7 @@ app.get('/confirm', (req, res) ->
 		'code': auth_code 
 	auth_url = 'https://api.instagram.com/oauth/access_token'
 	console.log 'postdata: ' + querystring.stringify(postdata)
+	response = {}
 	request.post({
 		url: auth_url,
 		body: querystring.stringify(postdata)
@@ -51,13 +52,9 @@ app.get('/confirm', (req, res) ->
 		if err
 			console.log("error from Instagram server")
 			res.send("error from Instagram server: " + err)
-
-		console.log 'body: ' + body
-		res.send(body)
-		console.log 'body obj: '
-		console.log(json.parse(body))
+		response = json.parse(body)
 	)
-	res.send('oops')
+	res.send(response)
 )
 
 app.get('/newimage', (req, res) ->
