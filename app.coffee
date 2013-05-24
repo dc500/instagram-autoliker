@@ -1,4 +1,6 @@
-express = require('express')
+express = require 'express'
+request = require 'request'
+querystring = require 'querystring'
 app = express()
 
 CLIENT_ID = '83f2bc2cf35842dbb45785e5b3efe457'
@@ -30,7 +32,25 @@ app.get('/confirm', (req, res) ->
 		res.send('error authenticating: ' + req.query.error_description)
 	auth_code = req.query.code
 	console.log 'code: ' + auth_code
-	res.send('auth_code: ' + auth_code)
+
+	postdata = 
+		'client_id': CLIENT_ID 
+		'client_secret': CLIENT_SECRET
+		'grant_type': 'authorization_code'
+		'redirect_uri': REDIRECT_URI
+		'code': auth_code 
+	auth_url = 'https://api.instagram.com/oauth/access_token'
+
+	request.post({
+		url: auth_url,
+		body: querystring.stringify(postdata)
+	}, (err, response, body) ->
+		if err
+			console.log("error from Instagram server")
+			res.send("error from Instagram server: " + err)
+		console.log(body)
+		res.send(body)
+	)
 )
 
 app.get('/newimage', (req, res) ->
