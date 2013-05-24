@@ -52,19 +52,11 @@ app.get('/confirm', (req, res) ->
 			console.log("error from Instagram server")
 			res.send("error from Instagram server: " + err)
 
-		console.log body
-		"""
-		console.log 'response'
-		console.log(json.stringify(response))
-		console.log 'body'
+		console.log 'body: ' + body
+		res.send body
+		console.log 'body obj: '
 		console.log(json.parse(body))
-		console.log 'sending'
-		"""
-		#res.send(json.parse(body))
-		res.send(body)
-		#res.send("access_token: " + access_token)
 	)
-	console.log 'fak'
 	res.send('oops')
 )
 
