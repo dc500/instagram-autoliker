@@ -21,39 +21,38 @@ app.get('/', (req, res) ->
 	res.redirect('/authorize')
 )
 
+# redirect user to Instagram login/approval page
 app.get('/authorize', (req, res) -> 
 	auth_uri = "https://api.instagram.com/oauth/authorize/?
 	client_id=#{CLIENT_ID}&
 	redirect_uri=#{REDIRECT_URI}&
 	response_type=code"
-
-	console.log('auth_uri: ' + auth_uri)
 	res.redirect(auth_uri)
 )
 
+# endpoint once user allows app
+# params: {access token, user: {id, username, full_name, profile_picture} }
 app.get('/confirm', (req, res) ->
 	if req.query.error
 		res.send('error authenticating: ' + req.query.error_description)
-	auth_code = req.query.code
-	console.log 'code: ' + auth_code
 
 	postdata = 
 		'client_id': CLIENT_ID 
 		'client_secret': CLIENT_SECRET
 		'grant_type': 'authorization_code'
 		'redirect_uri': REDIRECT_URI
-		'code': auth_code 
-	auth_url = 'https://api.instagram.com/oauth/access_token'
+		'code': req.query.auth_code 
+
+	# request the access token
 	request.post({
-		url: auth_url,
+		url: 'https://api.instagram.com/oauth/access_token',
 		body: querystring.stringify(postdata)
 	}, (err, response, body) ->
 		if err
-			console.log("error from Instagram server")
-			res.send("error from Instagram server: " + err)
+			res.send("error retrieving access token: " + err)
 		response = json.parse(body)
 		access_token = response.access_token
-		res.send(access_token)
+		res.send('Authentication successful!\naccess_token: ' + access_token)
 	)
 )
 
