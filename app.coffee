@@ -53,7 +53,7 @@ app.get('/confirm', (req, res) ->
 			res.send("error from Instagram server: " + err)
 
 		console.log 'body: ' + body
-		res.send body
+		response.send body
 		console.log 'body obj: '
 		console.log(json.parse(body))
 	)
