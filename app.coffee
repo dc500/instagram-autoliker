@@ -48,8 +48,9 @@ app.get('/confirm', (req, res) ->
 		if err
 			console.log("error from Instagram server")
 			res.send("error from Instagram server: " + err)
-		console.log(body)
-		res.send(body)
+		access_token = body.access_token
+		console.log access_token
+		res.send(access_token)
 	)
 )
 
