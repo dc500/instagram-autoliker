@@ -43,7 +43,6 @@ app.get('/confirm', (req, res) ->
 		'redirect_uri': REDIRECT_URI
 		'code': auth_code 
 	auth_url = 'https://api.instagram.com/oauth/access_token'
-	res.send(auth_code)
 	console.log 'making request'
 	request.post({
 		url: auth_url,
@@ -52,12 +51,15 @@ app.get('/confirm', (req, res) ->
 		if err
 			console.log("error from Instagram server")
 			res.send("error from Instagram server: " + err)
+		"""
 		console.log 'response'
 		console.log(json.stringify(response))
 		console.log 'body'
 		console.log(json.parse(body))
 		console.log 'sending'
-		res.send("access_token: " + access_token)
+		"""
+		res.send(json.parse(body))
+		#res.send("access_token: " + access_token)
 	)
 	console.log 'fak'
 	res.send('oops')
