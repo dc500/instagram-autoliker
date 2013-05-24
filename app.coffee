@@ -7,6 +7,7 @@ app = express()
 CLIENT_ID = '83f2bc2cf35842dbb45785e5b3efe457'
 CLIENT_SECRET = '8602ba3eda234f5cb32a305938943b59'
 REDIRECT_URI = 'http://pure-wildwood-8107.herokuapp.com/confirm'
+access_token = null
 
 app.configure ->
   app.set "port", process.env.PORT or 4000
@@ -43,8 +44,6 @@ app.get('/confirm', (req, res) ->
 		'redirect_uri': REDIRECT_URI
 		'code': auth_code 
 	auth_url = 'https://api.instagram.com/oauth/access_token'
-	console.log 'postdata: ' + querystring.stringify(postdata)
-	response = {}
 	request.post({
 		url: auth_url,
 		body: querystring.stringify(postdata)
@@ -53,8 +52,8 @@ app.get('/confirm', (req, res) ->
 			console.log("error from Instagram server")
 			res.send("error from Instagram server: " + err)
 		response = json.parse(body)
-		console.log response
-		res.send(response)
+		access_token = response.access_token
+		res.send(access_token)
 	)
 )
 
