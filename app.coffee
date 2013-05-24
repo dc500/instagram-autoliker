@@ -50,8 +50,9 @@ app.get('/confirm', (req, res) ->
 			res.send("error from Instagram server: " + err)
 		access_token = body["access_token"]
 		console.log body
+		console.log body.access_token
 		console.log access_token
-		res.send("body: " + body + "\n" + access_token: " + access_token)
+		res.send("body: " + body + "\n" + "access_token: " + access_token)
 	)
 )
 
