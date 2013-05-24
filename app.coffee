@@ -44,6 +44,7 @@ app.get('/confirm', (req, res) ->
 		'code': auth_code 
 	auth_url = 'https://api.instagram.com/oauth/access_token'
 
+	console.log 'making request'
 	request.post({
 		url: auth_url,
 		body: querystring.stringify(postdata)
