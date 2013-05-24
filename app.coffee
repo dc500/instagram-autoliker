@@ -53,8 +53,9 @@ app.get('/confirm', (req, res) ->
 			console.log("error from Instagram server")
 			res.send("error from Instagram server: " + err)
 		response = json.parse(body)
+		console.log response
+		res.send(response)
 	)
-	res.send(response)
 )
 
 app.get('/newimage', (req, res) ->
