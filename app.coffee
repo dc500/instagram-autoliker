@@ -1,6 +1,7 @@
 express = require 'express'
 request = require 'request'
 querystring = require 'querystring'
+json = require 'JSON'
 app = express()
 
 CLIENT_ID = '83f2bc2cf35842dbb45785e5b3efe457'
@@ -15,7 +16,9 @@ console.log 'Listening on port ' + app.get('port')
 # Routes
 # TODO: put these in a separate file
 
-app.get('/', (req, res) -> res.send('BEEZI SUX') )
+app.get('/', (req, res) -> 
+	res.redirect('/authorize')
+)
 
 app.get('/authorize', (req, res) -> 
 	auth_uri = "https://api.instagram.com/oauth/authorize/?
@@ -48,10 +51,8 @@ app.get('/confirm', (req, res) ->
 		if err
 			console.log("error from Instagram server")
 			res.send("error from Instagram server: " + err)
-		access_token = response.body.access_token
-		console.log 'typeof(response): ' + typeof(response)
-		console.log 'typeof(body): ' + typeof(body)
-		console.log access_token
+		console.log('response: ' + json.stringify(response))
+		console.log('body: ' + json.parse(body))
 		res.send("access_token: " + access_token)
 	)
 )
