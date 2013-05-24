@@ -43,7 +43,7 @@ app.get('/confirm', (req, res) ->
 		'redirect_uri': REDIRECT_URI
 		'code': auth_code 
 	auth_url = 'https://api.instagram.com/oauth/access_token'
-
+	res.send(auth_code)
 	console.log 'making request'
 	request.post({
 		url: auth_url,
