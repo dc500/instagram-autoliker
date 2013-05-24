@@ -51,10 +51,15 @@ app.get('/confirm', (req, res) ->
 		if err
 			console.log("error from Instagram server")
 			res.send("error from Instagram server: " + err)
-		console.log('response: ' + json.stringify(response))
-		console.log('body: ' + json.parse(body))
+		console.log 'response'
+		console.log(json.stringify(response))
+		console.log 'body'
+		console.log(json.parse(body))
+		console.log 'sending'
 		res.send("access_token: " + access_token)
 	)
+	console.log 'fak'
+	res.send('oops')
 )
 
 app.get('/newimage', (req, res) ->
