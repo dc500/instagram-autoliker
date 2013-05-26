@@ -50,10 +50,12 @@ app.get('/confirm', (req, res) ->
 		body: querystring.stringify(postdata)
 	}, (err, response, body) ->
 		if err
-			res.send("error retrieving access token: " + err)
+			res.send('error retrieving access token: ' + err)
 		response = json.parse(body)
-		create_subscription(response.access_token)
-		res.send('Authentication successful!')
+		# create_subscription(response.access_token)
+		access_token = response.access_token
+		get_user_feed(access_token)
+		res.send('Authentication successful!\n%s' % access_token)
 	)
 )
 
@@ -68,6 +70,14 @@ app.post('/newimage', (req, res) ->
 app.listen(app.get('port'))
 
 # helper functions
+
+get_user_feed (access_token) ->
+	url = """https://api.instagram.com/v1/
+			 users/self/feed?access_token=%s""" % access_token		
+	response = request.get(url)
+	console.log response
+
+# currently unused
 create_subscription (access_token) ->
 	postdata = 
 			'client_id': CLIENT_ID 
