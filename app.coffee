@@ -54,10 +54,8 @@ app.get('/confirm', (req, res) ->
 		response = json.parse(body)
 		#create_subscription(response.access_token)
 		access_token = response.access_token
-		res.send('after get user feed')
 		get_user_feed(access_token, res)
-		res.send('before get user feed')
-		res.send('Authentication successful!\n%s' % access_token)
+		#res.send('Authentication successful!\n%s' % access_token)
 	)
 )
 
@@ -76,6 +74,7 @@ get_user_feed = (access_token, res) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	response = request.get(url)
 	console.log 'got response in get user feed'
+	res.send(response)
 
 # currently unused
 create_subscription = (access_token) ->
