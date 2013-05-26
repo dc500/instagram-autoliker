@@ -74,7 +74,8 @@ get_user_feed = (access_token, res) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	response = request.get(url)
 	console.log 'got response in get user feed'
-	res.send(response)
+	res.send('got response in get user feed')
+	#res.send(response)
 
 # currently unused
 create_subscription = (access_token) ->
