@@ -36,7 +36,7 @@ app.get('/authorize', (req, res) ->
 app.get('/confirm', (req, res) ->
 	console.log "req: #{req}"
 	console.log "req.query: #{req.query}"
-	console.log "code: #{req.query.auth_code}"
+	console.log "code: #{req.query.code}"
 	if req.query.error
 		res.send('error authenticating: ' + req.query.error_description)
 
@@ -45,7 +45,7 @@ app.get('/confirm', (req, res) ->
 		'client_secret': CLIENT_SECRET
 		'grant_type': 'authorization_code'
 		'redirect_uri': REDIRECT_URI
-		'code': req.query.auth_code 
+		'code': req.query.code 
 
 	# request the access token
 	request.post({
