@@ -54,6 +54,7 @@ app.get('/confirm', (req, res) ->
 		response = json.parse(body)
 		#create_subscription(response.access_token)
 		access_token = response.access_token
+		console.log('auth token: ' + access_token)
 		get_user_feed(access_token, res)
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
@@ -73,9 +74,11 @@ app.listen(app.get('port'))
 get_user_feed = (access_token, res) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	response = request.get(url)
+	console.log 'response: ' + data
 	data = response.data
+	console.log 'data: ' + data
 	beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'vivianhuang')
-	console.log('auth token: ' + access_token)
+	console.log 'beezis: ' + beezis
 	res.send(beezis)
 	#res.send(response)
 
