@@ -75,12 +75,13 @@ app.listen(app.get('port'))
 get_user_feed = (access_token, res) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	response = request.get(url)
-	console.log 'response: ' + data
 	data = response.data
 	console.log 'data: ' + data
-	beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
-	console.log 'beezis: ' + beezis
-	res.send(beezis)
+	data2 = response['data']
+	console.log 'data2: ' + data2
+	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
+	#console.log 'beezis: ' + beezis
+	#res.send(beezis)
 	#res.send(response)
 
 # currently unused
