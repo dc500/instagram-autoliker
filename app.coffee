@@ -55,7 +55,7 @@ app.get('/confirm', (req, res) ->
 		res.send(response)
 		#create_subscription(response.access_token)
 		access_token = response.access_token
-		console.log('access token: #{access_token}')
+		console.log("access token: #{access_token}")
 		get_user_feed(access_token, res)
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
