@@ -73,8 +73,9 @@ app.listen(app.get('port'))
 get_user_feed = (access_token, res) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	response = request.get(url)
-	console.log 'got response in get user feed'
-	res.send('got response in get user feed')
+	data = reponse.data
+	beezis = (post for post)
+	res.send('access token: ' + access_token)
 	#res.send(response)
 
 # currently unused
