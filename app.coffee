@@ -34,9 +34,6 @@ app.get('/authorize', (req, res) ->
 # endpoint once user allows app
 # params: {access token, user: {id, username, full_name, profile_picture} }
 app.get('/confirm', (req, res) ->
-	console.log "req: #{req}"
-	console.log "req.query: #{req.query}"
-	console.log "code: #{req.query.code}"
 	if req.query.error
 		res.send('error authenticating: ' + req.query.error_description)
 
@@ -58,6 +55,7 @@ app.get('/confirm', (req, res) ->
 		res.send(response)
 		#create_subscription(response.access_token)
 		access_token = response.access_token
+		console.log('access token: #{access_token}')
 		get_user_feed(access_token, res)
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
@@ -80,7 +78,7 @@ get_user_feed = (access_token, res) ->
 	console.log 'response: ' + data
 	data = response.data
 	console.log 'data: ' + data
-	beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'vivianhuang')
+	beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
 	console.log 'beezis: ' + beezis
 	res.send(beezis)
 	#res.send(response)
