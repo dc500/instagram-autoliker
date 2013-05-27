@@ -34,9 +34,9 @@ app.get('/authorize', (req, res) ->
 # endpoint once user allows app
 # params: {access token, user: {id, username, full_name, profile_picture} }
 app.get('/confirm', (req, res) ->
-	console.log 'req: ' + req
-	console.log 'req.query: ' + req.query
-	console.log 'code: ' + req.query.auth_code
+	console.log "req: #{req}"
+	console.log "req.query: #{req.query}"
+	console.log "code: #{req.query.auth_code}"
 	if req.query.error
 		res.send('error authenticating: ' + req.query.error_description)
 
