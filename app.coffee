@@ -60,7 +60,8 @@ app.get('/confirm', (req, res) ->
 		#res.send(response)
 		#create_subscription(response.access_token)
 		access_token = body_json.access_token
-		setTimeout (get_user_feed(access_token, res), 5000)
+		callback = -> get_user_feed(access_token, res)
+		setTimeout callback, 5000
 		#		console.log '================='
 		#		console.log feed
 		#		console.log '================='
