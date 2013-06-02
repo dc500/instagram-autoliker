@@ -115,7 +115,7 @@ get_beezi = (feed, res, access_token) ->
 
 set_like = (media_id, access_token) ->
 	post_url = "https://api.instagram.com/v1/media/#{media_id}/likes"
-	console.log 'post to ' + url
+	console.log 'post to ' + post_url
 	request.post({
 		url: post_url,
 		body: querystring.stringify({'access_token': access_token})
