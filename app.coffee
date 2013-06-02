@@ -69,9 +69,10 @@ app.get('/confirm', (req, res) ->
 
 	#	until jsonFeedData
 	#		console.log 'wait'
-	
-	console.log 'send'
-	res.send(jsonFeedData)
+	callback -> 
+		console.log 'send'	
+		res.send(jsonFeedData)
+	setTimeout callback, 5000
 )
 
 app.get('/newimage', (req, res) ->
