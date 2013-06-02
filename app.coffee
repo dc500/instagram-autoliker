@@ -102,7 +102,7 @@ get_beezi = (feed, res) ->
 	#beezis = (post.images.standard_resolution.url for post in feed.data when post.user.username == 'ckoich')
 	#console.log 'beezis: ' + beezis
 
-	res.send(feed)
+	res.send(feed.data)
 
 # currently unused
 create_subscription = (access_token) ->
