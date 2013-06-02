@@ -83,13 +83,13 @@ app.listen(app.get('port'))
 # helper functions
 get_user_feed = (access_token) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
-	body_data = []
+	body_data = '' 
 	console.log("GET")
 	https.get(url, (res) -> 
 		res.setEncoding('utf8')
 		res.on('data', (d) ->
 			console.log 'got data'
-			body_data.push d
+			body_data += d
 		)
 		res.on('end', () ->
 			console.log 'end'
