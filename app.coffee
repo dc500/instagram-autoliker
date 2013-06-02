@@ -53,26 +53,19 @@ app.get('/confirm', (req, res) ->
 	}, (err, response, body) ->
 		if err
 			res.send('error retrieving access token: ' + err)
-		response = json.parse(body)
+		body_json = json.parse(body)
 		#res.send(response)
 		#create_subscription(response.access_token)
-		access_token = response.access_token
+		access_token = body_json.access_token
 		console.log("access token: #{access_token}")
 		feed = get_user_feed(access_token, res)
+		console.log 'got feed'
 		#res.send(json.parse(feed))
 		jsonFeedData = json.parse(feed)
-		console.log 'json feed found'
-		#res.send('check logs for feed')
-		#res.send('Authentication successful!\n%s' % access_token)
-	)
-
-
-	#	until jsonFeedData
-	#		console.log 'wait'
-	callback = () -> 
-		console.log 'send'	
+		console.log 'sending'
 		res.send(jsonFeedData)
-	setTimeout callback, 5000
+		console.log 'sent'
+	)
 )
 
 app.get('/newimage', (req, res) ->
