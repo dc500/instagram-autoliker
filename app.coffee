@@ -66,6 +66,7 @@ app.get('/confirm', (req, res) ->
 	)
 
 	until jsonFeedData
+		;
 	res.send(jsonFeedData)
 )
 
