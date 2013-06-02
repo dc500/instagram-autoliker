@@ -44,6 +44,8 @@ app.get('/confirm', (req, res) ->
 		'redirect_uri': REDIRECT_URI
 		'code': req.query.code 
 
+
+	jsonFeedData = null
 	# request the access token
 	request.post({
 		url: 'https://api.instagram.com/oauth/access_token',
@@ -57,13 +59,14 @@ app.get('/confirm', (req, res) ->
 		access_token = response.access_token
 		console.log("access token: #{access_token}")
 		feed = get_user_feed(access_token, res)
-		console.log 'LOL'
-		res.send(json.parse(feed))
+		#res.send(json.parse(feed))
+		jsonFeedData = json.parse(feed)
 		#res.send('check logs for feed')
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
 
-	res.send("wat")
+	until jsonFeedData
+	res.send(jsonFeedData)
 )
 
 app.get('/newimage', (req, res) ->
