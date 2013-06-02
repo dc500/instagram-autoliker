@@ -121,6 +121,7 @@ set_like = (media_id, access_token) ->
 		if err
 			res.send('error setting like: ' + err)
 		body_json = json.parse(body)
+		console.log 'response\n==============\n' + body_json
 		if body_json.meta.code == 200
 			console.log 'Liked media ' + media_id
 	)
