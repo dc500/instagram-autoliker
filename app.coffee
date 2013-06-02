@@ -66,8 +66,10 @@ app.get('/confirm', (req, res) ->
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
 
-	until jsonFeedData
-		console.log 'wait'
+
+	#	until jsonFeedData
+	#		console.log 'wait'
+	
 	console.log 'send'
 	res.send(jsonFeedData)
 )
