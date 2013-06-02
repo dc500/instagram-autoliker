@@ -29,7 +29,8 @@ app.get('/authorize', (req, res) ->
 	auth_uri = "https://api.instagram.com/oauth/authorize/?
 	client_id=#{CLIENT_ID}&
 	redirect_uri=#{REDIRECT_URI}&
-	response_type=code"
+	response_type=code&
+	scope=likes"
 	res.redirect(auth_uri)
 )
 
