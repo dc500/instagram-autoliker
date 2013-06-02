@@ -81,13 +81,15 @@ app.post('/newimage', (req, res) ->
 app.listen(app.get('port'))
 
 # helper functions
-get_user_feed = (access_token, res) ->
+get_user_feed = (access_token) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	console.log("GET")
-	https.get(url, (resp) -> 
-		console.log 'type resp: ' + typeof resp
-		console.log resp
-		return resp
+	https.get(url, (res) -> 
+		res.on('data', (d) ->
+			console.log 'got data'
+			console.log d
+			return d
+		)
 	).on('error', (e) -> 
 		console.log 'error: ' + e
 	)
