@@ -81,8 +81,8 @@ get_beezi = (access_token, res) ->
 	feed = get_user_feed(access_token, res)
 	console.log 'feed type: ' + typeof(feed)
 
-	beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
-	console.log 'beezis: ' + beezis
+	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
+	#console.log 'beezis: ' + beezis
 
 	res.send('beezi')
 
