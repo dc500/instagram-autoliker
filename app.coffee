@@ -91,11 +91,13 @@ get_user_feed = (access_token) ->
 			console.log 'got data'
 			body.append d
 		)
-		res.on('end') ->
+		res.on('end', () ->
 			console.log 'end'
 			console.log body
-	).on('error', (e) -> 
-		console.log 'error: ' + e
+		)
+		res.on('error', (e) -> 
+			console.log 'error: ' + e
+		)
 	)
 	return body
 	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
