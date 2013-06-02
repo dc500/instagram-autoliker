@@ -59,7 +59,7 @@ app.get('/confirm', (req, res) ->
 		#res.send(response)
 		#create_subscription(response.access_token)
 		access_token = body_json.access_token
-		get_beezi(access_token, res)
+		get_user_feed(access_token, res)
 		#		console.log '================='
 		#		console.log feed
 		#		console.log '================='
@@ -77,18 +77,10 @@ app.post('/newimage', (req, res) ->
 
 app.listen(app.get('port'))
 
-get_beezi = (access_token, res) ->
-	feed = get_user_feed(access_token, res)
-	console.log 'feed type: ' + typeof(feed)
-	console.log feed
-
-	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
-	#console.log 'beezis: ' + beezis
-
-	#res.send('beezi')
 
 # helper functions
 get_user_feed = (access_token, res_out) ->
+	feed = ''
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	https.get(url, (res) -> 
 		body_data = '' 
@@ -97,14 +89,21 @@ get_user_feed = (access_token, res_out) ->
 			body_data += d
 		)
 		res.on('end', () ->
-			res_out.send(body_data)
-			return JSON.parse(body_data)
+			get_beezi(JSON.parse(body_data), res_out)
 		)
 		res.on('error', (e) -> 
 			console.log 'error getting feed: ' + e
-			return 'err'
 		)
 	)
+
+get_beezi = (feed, res_out) ->
+	console.log 'feed type: ' + typeof(feed)
+	console.log feed
+
+	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
+	#console.log 'beezis: ' + beezis
+
+	#res.send('beezi')
 
 # currently unused
 create_subscription = (access_token) ->
