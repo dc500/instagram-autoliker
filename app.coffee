@@ -59,7 +59,7 @@ app.get('/confirm', (req, res) ->
 		access_token = body_json.access_token
 		console.log("access token: #{access_token}")
 		feed = get_user_feed(access_token, res)
-		consoe.log 'type: ' + typeof feed
+		console.log 'type: ' + typeof feed
 		console.log 'length: ' + feed.length
 		consoe.log feed
 		#jsonFeedData = json.parse(feed)
