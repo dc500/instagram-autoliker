@@ -61,8 +61,7 @@ app.get('/confirm', (req, res) ->
 		#create_subscription(response.access_token)
 		access_token = body_json.access_token
 		console.log 'setup callback'
-		callback = -> get_user_feed(access_token, res)
-		setTimeout callback, 5000
+		get_user_feed(access_token, res)
 		#		console.log '================='
 		#		console.log feed
 		#		console.log '================='
@@ -106,14 +105,16 @@ get_beezi = (feed, res, access_token) ->
 
 	posts_to_like = {} 
 	posts = (post for post in feed.data when post.user.username == target_user)
-	for post in posts when not post.user_has_liked
-		#if post.user_has_liked == false
-			#console.log 'unliked: ' + post.id
+	for post in posts
+		if post.user_has_liked == false
+			console.log 'not liked: ' + post.id
 		posts_to_like[post.id] = post.images.standard_resolution
 		set_like(post.id, access_token)
 
 	console.log 'posts: ' + posts
 	#res.send(beezis)
+	callback = -> get_user_feed(access_token, res)
+	setTimeout callback, 5000
 	res.send(posts)
 	#res.send(feed.data)
 
@@ -127,7 +128,6 @@ set_like = (media_id, access_token) ->
 		if err
 			res.send('error setting like: ' + err)
 		body_json = json.parse(body)
-		console.log 'response\n==============\n' + body
 		if body_json.meta.code == 200
 			console.log 'Liked media ' + media_id
 	)
