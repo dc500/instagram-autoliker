@@ -60,7 +60,7 @@ app.get('/confirm', (req, res) ->
 		#create_subscription(response.access_token)
 		access_token = body_json.access_token
 		console.log("access token: #{access_token}")
-		feed = get_user_feed(access_token, res)
+		get_user_feed(access_token, res)
 		#		console.log '================='
 		#		console.log feed
 		#		console.log '================='
