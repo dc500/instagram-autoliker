@@ -61,12 +61,14 @@ app.get('/confirm', (req, res) ->
 		feed = get_user_feed(access_token, res)
 		#res.send(json.parse(feed))
 		jsonFeedData = json.parse(feed)
+		console.log 'json feed found'
 		#res.send('check logs for feed')
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
 
 	until jsonFeedData
-		;
+		console.log 'wait'
+	console.log 'send'
 	res.send(jsonFeedData)
 )
 
