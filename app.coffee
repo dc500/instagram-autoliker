@@ -57,9 +57,9 @@ app.get('/confirm', (req, res) ->
 		access_token = response.access_token
 		console.log("access token: #{access_token}")
 		feed = get_user_feed(access_token, res)
-		console.log("LOL")
-		#res.send(json.parse(feed))
-		res.send('check logs for feed')
+		console.log 'LOL'
+		res.send(json.parse(feed))
+		#res.send('check logs for feed')
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
 )
