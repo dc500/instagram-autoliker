@@ -83,16 +83,21 @@ app.listen(app.get('port'))
 # helper functions
 get_user_feed = (access_token) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
+	body = []
 	console.log("GET")
 	https.get(url, (res) -> 
+		res.setEncoding('utf8')
 		res.on('data', (d) ->
 			console.log 'got data'
-			console.log d
-			return d
+			body.append d
 		)
+		res.on('end') ->
+			console.log 'end'
+			console.log body
 	).on('error', (e) -> 
 		console.log 'error: ' + e
 	)
+	return body
 	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
 	#console.log 'beezis: ' + beezis
 	#res.send(beezis)
