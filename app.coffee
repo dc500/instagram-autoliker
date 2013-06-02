@@ -58,8 +58,8 @@ app.get('/confirm', (req, res) ->
 		console.log("access token: #{access_token}")
 		feed = get_user_feed(access_token, res)
 		console.log(feed)
-		res.send(json.parse(feed))
-		#res.send('check logs for feed')
+		#res.send(json.parse(feed))
+		res.send('check logs for feed')
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
 )
@@ -77,6 +77,7 @@ app.listen(app.get('port'))
 # helper functions
 get_user_feed = (access_token, res) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
+	console.log("GET")
 	response = request.get(url)
 
 	"""
