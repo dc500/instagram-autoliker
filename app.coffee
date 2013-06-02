@@ -1,6 +1,7 @@
 express = require 'express'
 request = require 'request'
 http = require 'http'
+https = require 'https'
 querystring = require 'querystring'
 json = require 'JSON'
 app = express()
@@ -83,10 +84,12 @@ app.listen(app.get('port'))
 get_user_feed = (access_token, res) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	console.log("GET")
-	http.get(url, (resp) -> 
+	https.get(url, (resp) -> 
 		console.log 'type resp: ' + typeof resp
 		console.log resp
 		return resp
+	).on('error', (e) -> 
+		console.log 'error: ' + e
 	)
 	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
 	#console.log 'beezis: ' + beezis
