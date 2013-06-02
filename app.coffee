@@ -96,7 +96,7 @@ get_user_feed = (access_token, res_out) ->
 		)
 	)
 
-get_beezi = (feed, res_out) ->
+get_beezi = (feed, res) ->
 	console.log 'feed type: ' + typeof(feed)
 
 	#beezis = (post.images.standard_resolution.url for post in feed.data when post.user.username == 'ckoich')
