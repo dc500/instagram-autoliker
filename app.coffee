@@ -79,7 +79,7 @@ app.post('/newimage', (req, res) ->
 app.listen(app.get('port'))
 
 # helper functions
-get_user_feed = (access_token, res) ->
+get_user_feed = (access_token, res_out) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	body_data = '' 
 	console.log("GET")
@@ -91,7 +91,7 @@ get_user_feed = (access_token, res) ->
 		res.on('end', () ->
 			console.log 'end'
 			console.log body_data
-			res.send(body_data)
+			res_out.send(body_data)
 		)
 		res.on('error', (e) -> 
 			console.log 'error: ' + e
