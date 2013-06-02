@@ -108,10 +108,9 @@ get_beezi = (feed, res, access_token) ->
 	for post in posts
 		if post.user_has_liked == false
 			console.log 'not liked: ' + post.id
-		posts_to_like[post.id] = post.images.standard_resolution
-		set_like(post.id, access_token)
+			posts_to_like[post.id] = post.images.standard_resolution
+			set_like(post.id, access_token)
 
-	console.log 'posts: ' + posts
 	#res.send(beezis)
 	callback = -> get_user_feed(access_token, res)
 	setTimeout callback, 5000
