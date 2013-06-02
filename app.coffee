@@ -60,6 +60,7 @@ app.get('/confirm', (req, res) ->
 		#res.send(response)
 		#create_subscription(response.access_token)
 		access_token = body_json.access_token
+		console.log 'setup callback'
 		callback = -> get_user_feed(access_token, res)
 		setTimeout callback, 5000
 		#		console.log '================='
@@ -82,6 +83,7 @@ app.listen(app.get('port'))
 
 # helper functions
 get_user_feed = (access_token, res_out) ->
+	console.log 'get user feed'
 	feed = ''
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	https.get(url, (res) -> 
