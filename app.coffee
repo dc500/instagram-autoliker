@@ -111,7 +111,7 @@ get_beezi = (feed, res, access_token) ->
 
 	#res.send(beezis)
 	callback = -> get_user_feed(access_token, res)
-	setTimeout callback, 5000
+	setTimeout callback, 30000
 	res.send(posts)
 	#res.send(feed.data)
 
