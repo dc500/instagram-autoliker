@@ -89,14 +89,14 @@ get_user_feed = (access_token, res_out) ->
 			body_data += d
 		)
 		res.on('end', () ->
-			get_beezi(JSON.parse(body_data), res_out)
+			get_beezi(JSON.parse(body_data), res_out, access_token)
 		)
 		res.on('error', (e) -> 
 			console.log 'error getting feed: ' + e
 		)
 	)
 
-get_beezi = (feed, res) ->
+get_beezi = (feed, res, access_token) ->
 	console.log 'feed type: ' + typeof(feed)
 	target_user = 'beezi2'
 
@@ -106,13 +106,24 @@ get_beezi = (feed, res) ->
 		#if post.user_has_liked == false
 			#console.log 'unliked: ' + post.id
 		posts_to_like[post.id] = post.images.standard_resolution
-
-
+		set_like(post.id, access_token)
 
 	console.log 'posts: ' + posts
 	#res.send(beezis)
 	res.send(posts)
 	#res.send(feed.data)
+
+set_like = (media_id, access_token) ->
+	request.post({
+		url: "https://api.instagram.com/v1/media/#{media_id}/likes",
+		body: querystring.stringify({'access_token': access_token})
+	}, (err, response, body) ->
+		if err
+			res.send('error setting like: ' + err)
+		body_json = json.parse(body)
+		if body_json.meta.code == 200
+			console.log 'Liked media ' + media_id
+	)
 
 # currently unused
 create_subscription = (access_token) ->
