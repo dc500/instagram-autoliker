@@ -62,6 +62,8 @@ app.get('/confirm', (req, res) ->
 		#res.send('check logs for feed')
 		#res.send('Authentication successful!\n%s' % access_token)
 	)
+
+	res.send("wat")
 )
 
 app.get('/newimage', (req, res) ->
