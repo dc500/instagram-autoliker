@@ -61,12 +61,10 @@ app.get('/confirm', (req, res) ->
 		access_token = body_json.access_token
 		console.log("access token: #{access_token}")
 		feed = get_user_feed(access_token, res)
-		console.log 'type: ' + typeof feed
-		console.log '================='
-		console.log feed
-		console.log '================='
+		#		console.log '================='
+		#		console.log feed
+		#		console.log '================='
 		#jsonFeedData = json.parse(feed)
-		res.send(feed)
 	)
 )
 
@@ -81,7 +79,7 @@ app.post('/newimage', (req, res) ->
 app.listen(app.get('port'))
 
 # helper functions
-get_user_feed = (access_token) ->
+get_user_feed = (access_token, res) ->
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	body_data = '' 
 	console.log("GET")
@@ -93,7 +91,7 @@ get_user_feed = (access_token) ->
 		res.on('end', () ->
 			console.log 'end'
 			console.log body_data
-			return body_data
+			res.send(body_data)
 		)
 		res.on('error', (e) -> 
 			console.log 'error: ' + e
