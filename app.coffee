@@ -69,7 +69,7 @@ app.get('/confirm', (req, res) ->
 
 	#	until jsonFeedData
 	#		console.log 'wait'
-	callback -> 
+	callback = () -> 
 		console.log 'send'	
 		res.send(jsonFeedData)
 	setTimeout callback, 5000
