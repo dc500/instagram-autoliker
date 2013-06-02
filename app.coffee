@@ -85,7 +85,7 @@ get_beezi = (access_token, res) ->
 	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
 	#console.log 'beezis: ' + beezis
 
-	res.send('beezi')
+	#res.send('beezi')
 
 # helper functions
 get_user_feed = (access_token, res_out) ->
@@ -97,11 +97,12 @@ get_user_feed = (access_token, res_out) ->
 			body_data += d
 		)
 		res.on('end', () ->
-			#res_out.send(body_data)
+			res_out.send(body_data)
 			return JSON.parse(body_data)
 		)
 		res.on('error', (e) -> 
 			console.log 'error getting feed: ' + e
+			return 'err'
 		)
 	)
 
