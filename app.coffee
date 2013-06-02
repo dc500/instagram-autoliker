@@ -66,7 +66,7 @@ app.get('/confirm', (req, res) ->
 		console.log feed
 		console.log '================='
 		#jsonFeedData = json.parse(feed)
-		res.send('lol')
+		res.send(feed)
 	)
 )
 
