@@ -102,9 +102,9 @@ get_beezi = (feed, res) ->
 
 	posts_to_like = {} 
 	posts = (post for post in feed.data when post.user.username == target_user)
-	for post in posts:
-		if post.user_has_liked == false
-			console.log 'unliked: ' + post.id
+	for post in posts when not post.user_has_liked
+		#if post.user_has_liked == false
+			#console.log 'unliked: ' + post.id
 		posts_to_like[post.id] = post.images.standard_resolution
 
 
