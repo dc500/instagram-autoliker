@@ -98,12 +98,11 @@ get_user_feed = (access_token, res_out) ->
 
 get_beezi = (feed, res_out) ->
 	console.log 'feed type: ' + typeof(feed)
-	console.log feed
 
-	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
+	#beezis = (post.images.standard_resolution.url for post in feed.data when post.user.username == 'ckoich')
 	#console.log 'beezis: ' + beezis
 
-	#res.send('beezi')
+	res.send(feed.data)
 
 # currently unused
 create_subscription = (access_token) ->
