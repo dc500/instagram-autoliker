@@ -98,12 +98,19 @@ get_user_feed = (access_token, res_out) ->
 
 get_beezi = (feed, res) ->
 	console.log 'feed type: ' + typeof(feed)
+	target_user = 'beezi2'
 
-	beezis = (post.images.standard_resolution.url for post in feed.data when post.user.username == 'ckoich')
-	console.log 'beezis: ' + beezis
+	posts_to_like = {} 
+	posts = (post for post in feed.data when post.user.username == target_user)
+	for post in posts when not post.user_has_liked:
+		posts_to_like[post.id] = post.images.standard_resolution
 
+
+
+	console.log 'posts: ' + posts
 	#res.send(beezis)
-	res.send(feed.data)
+	res.send(posts)
+	#res.send(feed.data)
 
 # currently unused
 create_subscription = (access_token) ->
