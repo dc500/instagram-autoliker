@@ -87,10 +87,11 @@ get_user_feed = (access_token, res_out) ->
 		res.setEncoding('utf8')
 		res.on('data', (d) ->
 			console.log 'got data'
+			body_data += d
 		)
 		res.on('end', () ->
 			console.log 'end'
-			console.log body_data
+			console.log 'data out: ' + body_data
 			res_out.send(body_data)
 		)
 		res.on('error', (e) -> 
