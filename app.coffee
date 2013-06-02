@@ -60,7 +60,7 @@ app.get('/confirm', (req, res) ->
 		#res.send(response)
 		#create_subscription(response.access_token)
 		access_token = body_json.access_token
-		setTimeout get_user_feed(access_token, res), 5000
+		setTimeout (get_user_feed(access_token, res), 5000)
 		#		console.log '================='
 		#		console.log feed
 		#		console.log '================='
@@ -98,7 +98,7 @@ get_user_feed = (access_token, res_out) ->
 	)
 
 get_beezi = (feed, res, access_token) ->
-	console.log 'feed type: ' + typeof(feed)
+	console.log 'searching for new posts ...'
 	target_user = 'beezi2'
 
 	posts_to_like = {} 
