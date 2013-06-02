@@ -89,17 +89,16 @@ get_user_feed = (access_token) ->
 		res.setEncoding('utf8')
 		res.on('data', (d) ->
 			console.log 'got data'
-			body_data += d
 		)
 		res.on('end', () ->
 			console.log 'end'
 			console.log body_data
+			return body_data
 		)
 		res.on('error', (e) -> 
 			console.log 'error: ' + e
 		)
 	)
-	return body_data
 	#beezis = (post.images.standard_resolution.url for post in data when post.user.username == 'maggiegrab')
 	#console.log 'beezis: ' + beezis
 	#res.send(beezis)
