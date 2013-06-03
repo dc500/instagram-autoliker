@@ -11,6 +11,7 @@ CLIENT_ID = '83f2bc2cf35842dbb45785e5b3efe457'
 CLIENT_SECRET = '8602ba3eda234f5cb32a305938943b59'
 REDIRECT_URI = BASE_URL + '/confirm'
 access_token = null
+search_num = 0
 
 app.configure ->
   app.set "port", process.env.PORT or 4000
@@ -82,7 +83,6 @@ app.listen(app.get('port'))
 
 # helper functions
 get_user_feed = (access_token, res_out) ->
-	console.log 'get user feed'
 	feed = ''
 	url = 'https://api.instagram.com/v1/users/self/feed?access_token=' + access_token		
 	https.get(url, (res) -> 
@@ -100,7 +100,7 @@ get_user_feed = (access_token, res_out) ->
 	)
 
 get_beezi = (feed, res, access_token) ->
-	console.log 'searching for new posts ...'
+	console.log 'searching for new posts attempt ' + serach_num
 	target_user = 'drdoomz'
 
 	posts = (post for post in feed.data when post.user.username == target_user)
@@ -111,13 +111,13 @@ get_beezi = (feed, res, access_token) ->
 
 	#res.send(beezis)
 	callback = -> get_user_feed(access_token, res)
+	search_num += 1
 	setTimeout callback, 30000
 	res.send(posts)
 	#res.send(feed.data)
 
 set_like = (media_id, access_token) ->
 	post_url = "https://api.instagram.com/v1/media/#{media_id}/likes"
-	console.log 'post to ' + post_url
 	request.post({
 		url: post_url,
 		body: querystring.stringify({'access_token': access_token})
