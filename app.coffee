@@ -101,7 +101,7 @@ get_user_feed = (access_token, res_out) ->
 
 get_beezi = (feed, res, access_token) ->
 	console.log 'searching for new posts ...'
-	target_user = 'beezi2'
+	target_user = 'drdoomz'
 
 	posts = (post for post in feed.data when post.user.username == target_user)
 	for post in posts
